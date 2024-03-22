@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        "white": '#ffffff',
+        "blue": "rgb(0, 145, 255)"
+      },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         jetmono: ["JetBrains Mono", "monospace"],

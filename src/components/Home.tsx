@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Box, CssBaseline, Grid } from '@mui/material'
 import { TypeAnimation } from 'react-type-animation';
 import Develop from "../assets/develop.png"
@@ -19,9 +19,10 @@ import CIcon from "../assets/skills/cpp.png"
 import CppIcon from "../assets/skills/cpp2.png"
 import AndroidIcon from "../assets/skills/android.svg"
 import Pattern from "../assets/pattern.svg"
-
+import ProjectBG from "../assets/project-bg.svg"
 import ReactIcon from "../assets/skills/react.svg"
 import MUIIcon from "../assets/skills/mui.svg"
+import {motion, useScroll , useTransform} from 'framer-motion';
 type Props = {}
 
 const Home = (props: Props) => {
@@ -85,7 +86,7 @@ const Home = (props: Props) => {
                         experience using modern frontend architecture.</h5>
                 <div className='mt-5'>
                     <h5 className='text-gray-300 mb-3 uppercase font-poppins'>Programming Languages</h5>
-                    <div className='flex h-14 gap-6' >
+                    <div className='flex h-16 gap-6' >
                             <img src={PythonIcon} alt=""/>
                             <img src={CIcon} alt="" />
                             <img src={CppIcon} alt="" />
@@ -94,7 +95,7 @@ const Home = (props: Props) => {
                 </div>
                 <div className='mt-5'>
                     <h5 className='text-gray-300 mb-3 uppercase font-poppins'>Frontend Languages</h5>
-                    <div className='flex h-14 gap-6' >
+                    <div className='flex h-16 gap-6' >
                             <img src={HTMLIcon} alt=""/>
                             <img src={CSSIcon} alt="" />
                             <img src={JSIcon} alt="" />
@@ -106,7 +107,7 @@ const Home = (props: Props) => {
                 </div>
                 <div className='mt-5'>
                     <h5 className='text-gray-300 mb-3 uppercase font-poppins'>Backend Technologies</h5>
-                    <div className='flex h-14 gap-6' >
+                    <div className='flex h-16 gap-6' >
                             <img src={ExpressIcon} alt=""/>
                             <img src={MongoIcon} alt="" />
                             <img src={Firebase} alt="" />
@@ -120,8 +121,80 @@ const Home = (props: Props) => {
 
         </Grid>
         
+        <HorizontalScrollCarousel/>
+
+
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas nobis eveniet nostrum ducimus voluptatum ex possimus, earum saepe odit mollitia cum distinctio nisi ullam molestias facilis! Nobis repudiandae deserunt fuga.
+        </div>
     </div>
   )
 }
+
+const HorizontalScrollCarousel = () => {
+    const targetRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+      target: targetRef,
+    });
+  
+    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
+  
+    return (
+        <section ref={targetRef} className="relative h-[300vh] bg-neutral-900">
+        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+          <motion.div style={{ x }} className="flex gap-4">
+            {projects.map((project, ind) => {
+              return <Card key={ind} title={project.title} description={project.description} additional={project.additional} color={project.color}/>;
+            })}
+          </motion.div>
+        </div>
+      </section>
+    );
+  };
+
+const cards = [2,324,1,3,4,5,6,7,8,9,12,13,14]
+const projects=[{
+    title: "FFCS Combogen",
+    description: "Timetable Generating website for VIT students",
+    additional: "Used by 6000+ VIT students",
+    color: "red"
+},{
+    title: "Code Craft",
+    description: "Many people can code at realtime similar to Google docs",
+    additional: "Used by 6000+ VIT students",
+    color: "white"
+},
+{
+    title: "My School Education",
+    description: "An android app for schools and students to have a centralized app ",
+    additional: "Used by 6000+ VIT students",
+    color: "blue"
+},
+{
+    title: "Bull Market",
+    description: "A realtime stock market indra day stocks recommender",
+    additional: "Used by 6000+ VIT students",
+    color: "orange"
+}]
+
+interface CardProps{
+    title: string;
+    description: string,
+    additional: string,
+    color: string
+}
+
+const Card = (props: CardProps)=> {
+    return (
+        <div
+        className={`w-[400px] h-[250px] bg-[${props.color}] p-5`}
+      >
+        <h5>{props.title}</h5>
+        <p>TimeTable live for wfeed</p>
+        <p>6k+ users</p>
+      </div>
+      
+    );
+  };
 
 export default Home
