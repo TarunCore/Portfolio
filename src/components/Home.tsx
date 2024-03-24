@@ -20,11 +20,47 @@ import CppIcon from "../assets/skills/cpp2.png"
 import AndroidIcon from "../assets/skills/android.svg"
 import Pattern from "../assets/pattern.svg"
 import ProjectBG from "../assets/project-bg.svg"
+import FFCS from "../assets/ffcs.jpg"
+import CRAFT from "../assets/craft.png"
+import MySE from "../assets/MySE.png"
+import BullMarket from "../assets/BullMarket.png"
 import ReactIcon from "../assets/skills/react.svg"
 import MUIIcon from "../assets/skills/mui.svg"
 import {motion, useScroll , useTransform} from 'framer-motion';
+import ContactMe from './ContactMe';
 type Props = {}
-
+const projects=[{
+    title: "FFCS Combogen",
+    description: "Timetable Generating website for VIT students",
+    additional: "Used by 6000+ VIT students",
+    color: FFCS,
+    deployedLink: "https://ffcscombogen.in/",
+    githubLink: "https://github.com/TarunCore/FFCS-Combogen-JS",
+    linkedInLink: "https://www.linkedin.com/feed/update/urn:li:activity:7085654506952163328/"
+},{
+    title: "Code Craft",
+    description: "A collaborative code editor where multiple users can edit code at same time similar to Google Docs",
+    additional: "",
+    color: CRAFT,
+    deployedLink: "https://code-craft-live.netlify.app/",
+    githubLink: "https://github.com/TarunCore/Code-Craft"
+},
+{
+    title: "My School Education",
+    description: "An android app for schools and students to have a centralized app ",
+    additional: "",
+    color: MySE,
+    deployedLink: "https://play.google.com/store/apps/details?id=com.innocraze.myse",
+    githubLink: "https://github.com/TarunCore/MySchoolEducation"
+},
+{
+    title: "Bull Market",
+    description: "A realtime stock market intra day stocks recommender with chatting features",
+    additional: "",
+    color: BullMarket,
+    deployedLink: "https://play.google.com/store/apps/details?id=com.tweshllc.kskdhallmill",
+    githubLink: "https://github.com/TarunCore/BullMarket"
+}]
 const Home = (props: Props) => {
   return (
     <div className='m-[20px]'>
@@ -70,11 +106,8 @@ const Home = (props: Props) => {
         </Grid>
 
         <div className='w-full pl-10 pr-10'>
-            <h2 className='text-2xl md:text-6xl font-poppins text-center'>
-            Currently pursing CSE at VIT, Vellore. I'm focused
-            on building scalable and performant apps. I take
-            responsibility to craft a good user experience using
-            modern frontend and backend architecture.
+            <h2 className='text-2xl md:text-5xl font-poppins text-center text-gray-100'>
+            Currently pursing CSE at VIT, Vellore. I'm dedicated to crafting top-tier applications. I focus on scalability and performance, utilizing modern frontend and backend architecture to deliver outstanding user experiences.
             </h2>
         </div>
 
@@ -123,10 +156,7 @@ const Home = (props: Props) => {
         
         <HorizontalScrollCarousel/>
 
-
-        <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas nobis eveniet nostrum ducimus voluptatum ex possimus, earum saepe odit mollitia cum distinctio nisi ullam molestias facilis! Nobis repudiandae deserunt fuga.
-        </div>
+        <ContactMe/>
     </div>
   )
 }
@@ -140,11 +170,12 @@ const HorizontalScrollCarousel = () => {
     const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
   
     return (
-        <section ref={targetRef} className="relative h-[300vh] bg-neutral-900">
-        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+        <section ref={targetRef} className="relative h-[300vh]">
+        <div className="sticky top-0 flex flex-col h-screen justify-center overflow-hidden">
+        <h1 className='myskills seq text-5xl w-fit font-poppins font-medium mb-12 p-2'>Projects</h1>
           <motion.div style={{ x }} className="flex gap-4">
             {projects.map((project, ind) => {
-              return <Card key={ind} title={project.title} description={project.description} additional={project.additional} color={project.color}/>;
+              return <Card key={ind} title={project.title} description={project.description} additional={project.additional} color={project.color} githubLink={project.githubLink} deployedLink={project.deployedLink} linkedInLink={project.linkedInLink}/>;
             })}
           </motion.div>
         </div>
@@ -152,46 +183,31 @@ const HorizontalScrollCarousel = () => {
     );
   };
 
-const cards = [2,324,1,3,4,5,6,7,8,9,12,13,14]
-const projects=[{
-    title: "FFCS Combogen",
-    description: "Timetable Generating website for VIT students",
-    additional: "Used by 6000+ VIT students",
-    color: "red"
-},{
-    title: "Code Craft",
-    description: "Many people can code at realtime similar to Google docs",
-    additional: "Used by 6000+ VIT students",
-    color: "white"
-},
-{
-    title: "My School Education",
-    description: "An android app for schools and students to have a centralized app ",
-    additional: "Used by 6000+ VIT students",
-    color: "blue"
-},
-{
-    title: "Bull Market",
-    description: "A realtime stock market indra day stocks recommender",
-    additional: "Used by 6000+ VIT students",
-    color: "orange"
-}]
+
 
 interface CardProps{
     title: string;
     description: string,
     additional: string,
-    color: string
+    color: any,
+    deployedLink: string,
+    githubLink: string,
+    linkedInLink?: string
 }
 
 const Card = (props: CardProps)=> {
     return (
         <div
-        className={`w-[400px] h-[250px] bg-[${props.color}] p-5`}
+        className={`w-[450px] h-[360px] bg-[${props.color}] p-5 border border-white rounded-lg flex flex-col gap-2`}
       >
-        <h5>{props.title}</h5>
-        <p>TimeTable live for wfeed</p>
-        <p>6k+ users</p>
+        <h5 className='font-medium text-3xl'>{props.title}</h5>
+        <p>{props.description}</p>
+        <p>{props.additional}</p>
+        <div className='flex gap-2 justify-around'>
+            <a href={props.deployedLink} className='text-purple-300'>Live Link</a>
+            <a href={props.githubLink} className='text-purple-300'>Github Link</a>
+        </div>
+        <img src={props.color} alt="" />
       </div>
       
     );
