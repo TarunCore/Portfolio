@@ -64,6 +64,7 @@ const projects=[{
 const Home = (props: Props) => {
   return (
     <div className='m-[20px]'>
+        <section id='home'>
         <Grid container minHeight={"95vh"}>
             <Grid item md={8}>
                 <Box display={"flex"} flexDirection={"column"} alignContent={"flex-start"} justifyContent={"center"} gap={"15px"} height={"100%"} ml={5}>
@@ -94,7 +95,7 @@ const Home = (props: Props) => {
                     <a href="mailto:itstarun14@gmail.com">
                         <img src={MailIcon} alt="mail-01" width="24" height="24" />
                     </a>
-                    <a href="https://twitter.com/tarun_hash">
+                    <a href="https://twitter.com/">
                         <img src={TwitterIcon} alt="twitter-01" width="24" height="24" />
                     </a>
                 </div>
@@ -104,13 +105,13 @@ const Home = (props: Props) => {
                 <img src={Develop} alt="" className='max-h-[90vh] md:mt-[10vh]'/>
             </Grid>
         </Grid>
-
+        </section>
         <div className='w-full pl-10 pr-10'>
             <h2 className='text-2xl md:text-5xl font-poppins text-center text-gray-100'>
             Currently pursing CSE at VIT, Vellore. I'm dedicated to crafting top-tier applications. I focus on scalability and performance, utilizing modern frontend and backend architecture to deliver outstanding user experiences.
             </h2>
         </div>
-
+        <section id="skillsection">
         <Grid container>
             <Grid item md={8} m={6}>
             <div>
@@ -153,7 +154,7 @@ const Home = (props: Props) => {
             </Grid>
 
         </Grid>
-        
+        </section>
         <HorizontalScrollCarousel/>
 
         <ContactMe/>
@@ -170,7 +171,7 @@ const HorizontalScrollCarousel = () => {
     const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
   
     return (
-        <section ref={targetRef} className="relative h-[300vh]">
+        <section id="projects" ref={targetRef} className="relative h-[300vh]">
         <div className="sticky top-0 flex flex-col h-screen justify-center overflow-hidden">
         <h1 className='myskills seq text-5xl w-fit font-poppins font-medium mb-12 p-2'>Projects</h1>
           <motion.div style={{ x }} className="flex gap-4">
